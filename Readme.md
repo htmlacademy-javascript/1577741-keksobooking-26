@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Маргарита Ли](https://up.htmlacademy.ru/javascript/26/user/1577741).
-* Наставник: [Сергей Карпов](https://htmlacademy.ru/profile/id518893).
+* Наставник: [Павел Лукин](https://htmlacademy.ru/profile/id1313529).
 
 ---
 
