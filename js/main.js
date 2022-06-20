@@ -1,5 +1,8 @@
-import {makeOffers, getRandomArrayElement} from './data.js';
-import './utils.js';
+import {makeOffers} from './data.js';
+import {getRandomArrayElement} from './utils.js';
+import {getRandomPositiveInteger} from './utils.js';
+import {getRandomPositiveFloat} from './utils.js';
+
 
 const getRandomFeatures = (count, array) => {
   const newFeatures = [];
@@ -24,4 +27,6 @@ const makeGenerator = (count) => {
 };
 
 const getAvatar = makeGenerator(10);
+
+export {getRandomFeatures, makeGenerator, getAvatar};
 

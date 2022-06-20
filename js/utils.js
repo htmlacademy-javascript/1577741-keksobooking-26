@@ -17,4 +17,4 @@ getRandomPositiveFloat(1.3, 4.9, 3);
 
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 
-export {getRandomArrayElement};
+export {getRandomArrayElement, getRandomPositiveInteger, getRandomPositiveFloat};
