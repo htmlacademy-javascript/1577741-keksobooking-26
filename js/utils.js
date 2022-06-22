@@ -17,4 +17,22 @@ getRandomPositiveFloat(1.3, 4.9, 3);
 
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 
-export {getRandomArrayElement, getRandomPositiveInteger, getRandomPositiveFloat};
+
+
+const getRandomFeatures = (count, array) => {
+  const newFeatures = [];
+  if (count >= array.length) {
+    return array;
+  }
+  for (let i = 0; i < count; i++) {
+    let newElement = array[Math.floor(Math.random() * array.length)];
+    while (newFeatures.includes(newElement)) {
+      newElement = array[Math.floor(Math.random() * array.length)];
+    }
+    newFeatures.push(newElement);
+  }
+  return newFeatures;
+
+};
+
+export {getRandomArrayElement, getRandomPositiveInteger, getRandomPositiveFloatб getRandomFeatures};

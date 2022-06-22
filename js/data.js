@@ -4,6 +4,7 @@ import {getRandomPositiveFloat} from './utils.js';
 import {getRandomFeatures} from './main.js';
 import {makeGenerator} from './main.js';
 import {getAvatar} from './main.js';
+import {getRandomFeatures} from './utils.js';
 
 const offerTitle = [
   'Добро пожаловать в наш шикарный дворец!',
