@@ -18,7 +18,6 @@ getRandomPositiveFloat(1.3, 4.9, 3);
 const getRandomArrayElement = (elements) => elements[getRandomPositiveInteger(0, elements.length - 1)];
 
 
-
 const getRandomFeatures = (count, array) => {
   const newFeatures = [];
   if (count >= array.length) {
@@ -35,4 +34,12 @@ const getRandomFeatures = (count, array) => {
 
 };
 
-export {getRandomArrayElement, getRandomPositiveInteger, getRandomPositiveFloatб getRandomFeatures};
+const makeGenerator = (count) => {
+  const pull = Array.from({length: count}, (_, index) => index);
+  return () =>
+    pull.splice(getRandomPositiveInteger(0, pull.length - 1), 1).shift();
+};
+
+const getAvatar = makeGenerator(10);
+
+export {getRandomArrayElement, getRandomPositiveInteger, getRandomPositiveFloat, getRandomFeatures, makeGenerator, getAvatar};
