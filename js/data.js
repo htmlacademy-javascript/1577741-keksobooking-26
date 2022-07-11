@@ -74,6 +74,5 @@ const makeOffer = () => {
 
 const makeOffers = () => Array.from({length: ROOMS_OFFERS}, makeOffer);
 
-makeOffers();
 
 export {makeOffers};
