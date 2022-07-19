@@ -9,7 +9,7 @@ const disableActiveState = () => {
     fieldset.disabled = true;
   });
 
-  mapFilters.classList.add('ad-form--disabled');
+  mapFilters.classList.add('map__filters--disabled');
   for (const child of mapFiltersChildren) {
     child.disabled = true;
   }
@@ -21,7 +21,7 @@ const enableActiveState = () => {
     fieldset.disabled = false;
   });
 
-  mapFilters.classList.remove('ad-form--disabled');
+  mapFilters.classList.remove('map__filters--disabled');
   for (const child of mapFiltersChildren) {
     child.disabled = false;
   }
