@@ -31,8 +31,6 @@ const maxCapacity = {
   100: [0]
 };
 
-Pristine.addValidator('min', () => true);
-Pristine.addValidator('max', () => true);
 
 const pristine = new Pristine(adForm, {
   classTo: 'ad-form__element',
@@ -84,10 +82,8 @@ const addValidateForm = () => {
   roomNumberField.addEventListener('change', onPristineValidate);
   capacityField.addEventListener('change', onPristineValidate);
 
-  adForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    pristine.validate();
-  });
+  adForm.addEventListener('submit', onPristineValidate);
+
 };
 
 export {addValidateForm};
