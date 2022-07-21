@@ -4,3 +4,8 @@ const offers = makeOffers();
 renderPopup(offers[1]);
 import {addValidateForm} from './user-form.js';
 addValidateForm();
+import {showError} from './util.js';
+import {changeStateAdForm, changeStateMapFilterForm} from './form-state.js';
+import {initUserForm} from './user-form.js';
+import {createMap, renderOnMap} from './map.js';
+import {getData, prepareData} from './api.js';
