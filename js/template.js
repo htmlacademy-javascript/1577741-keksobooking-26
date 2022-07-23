@@ -38,14 +38,13 @@ const createCard = (data) => {
   if (!offer.features) {
     features.remove();
   } else {
-    const featuresList = popup.querySelectorAll('.popup__feature');
-    const availableFeatures = offer.features.map((feature) => `popup__feature--${feature}`);
-    featuresList.forEach((item) => {
-      const isFeatureExist = Boolean([...item.classList].filter((x) => availableFeatures.includes(x)).length);
-      if (!isFeatureExist) {
-        item.remove();
-      }
-    });
+    const featuresList = popup.querySelector('.popup__features');
+    featuresList.innerHTML = '';
+    featuresList.append(...offer.features.map((feature) => {
+      const element = document.createElement('li');
+      element.classList = `popup__feature popup__feature--${feature}`;
+      return element;
+    }));
   }
 
   if (!offer.description) {
@@ -54,7 +53,7 @@ const createCard = (data) => {
     description.textContent = offer.description;
   }
 
-  if (!offer.photos.length) {
+  if (!(offer.photos && offer.photos.length)) {
     photos.remove();
   } else {
     const photosFragment = document.createDocumentFragment();

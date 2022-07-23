@@ -5,11 +5,9 @@ const ITEMS_PER_PORTION = 10;
 const getData = (onSuccess, onFail) => {
   fetch(URL_GET_DATA)
     .then((response) => response.json())
-    .then((items) => {
-      onSuccess(items);
-    })
-    .catch(() => {
-      onFail('Не удалось загрузить данные. Попробуйте перезагрузить страницу');
+    .then(onSuccess)
+    .catch((err) => {
+      onFail(err);
     });
 };
 
@@ -24,12 +22,12 @@ const sendData = (onSuccess, onFail, formData) => {
     .then((response) => {
       if (response.ok) {
         onSuccess();
-      } else {
-        onFail('Не удалось отправить форму. Попробуйте ещё раз');
+        return;
       }
+      throw Error('Не удалось отправить форму. Попробуйте ещё раз');
     })
-    .catch(() => {
-      onFail('Не удалось отправить форму. Попробуйте ещё раз');
+    .catch((err) => {
+      onFail(err);
     });
 };
 

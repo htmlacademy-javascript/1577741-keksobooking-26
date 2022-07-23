@@ -1,11 +1,15 @@
-import{makeOffers} from './data.js';
-import{renderPopup} from './popup.js';
-const offers = makeOffers();
-renderPopup(offers[1]);
-import {addValidateForm} from './user-form.js';
-addValidateForm();
-import {showError} from './util.js';
-import {changeStateAdForm, changeStateMapFilterForm} from './form-state.js';
+import {showError} from './utils.js';
+import {changeStateAdForm, changeStateMapFilterForm} from './form.js';
 import {initUserForm} from './user-form.js';
 import {createMap, renderOnMap} from './map.js';
 import {getData, prepareData} from './api.js';
+
+initUserForm();
+changeStateAdForm(false);
+changeStateMapFilterForm(false);
+getData((offers) => {
+  createMap();
+  renderOnMap(prepareData(offers));
+  changeStateAdForm(true);
+  changeStateMapFilterForm(true);
+}, showError);

@@ -1,4 +1,4 @@
-import {changeStateAdForm} from './form-state.js';
+import {changeStateAdForm} from './form.js';
 import {createCard} from './template.js';
 
 const ZOOM_DEFAULT = 10;
@@ -38,7 +38,7 @@ L.tileLayer(
 ).addTo(map);
 
 const setAddress = (lat, lng) => {
-  addressField.value = `Широта: ${lat}, долгота: ${lng}`;
+  addressField.value = `${lat}, ${lng}`;
 };
 
 mainPinMarker.addTo(map);
@@ -68,7 +68,7 @@ const createMarker = (item) => {
   );
   marker
     .addTo(markerGroup)
-    .bindPopup(createCard(item));
+    .bindPopup(() => createCard(item));
 };
 
 const renderOnMap = (items) => {

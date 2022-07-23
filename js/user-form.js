@@ -1,5 +1,5 @@
-import {showSuccess, showError} from './util.js';
-import {resetMapFilterForm} from './form-state.js';
+import {showSuccess, showError} from './utils.js';
+import {resetMapFilterForm} from './form.js';
 import {setMapOriginalState} from './map.js';
 import {sendData} from './api.js';
 
@@ -59,9 +59,8 @@ const onPristineValidate = (evt) => {
 
 const updatePriceInput = (houseType) => {
   priceField.placeholder = minPrices[houseType];
-  priceField.placeholder = maxPrices[houseType];
   priceField.min = minPrices[houseType];
-  priceField.max = maxPrices[houseType];
+  priceField.max = '100000';
 };
 
 const onTypeFieldSelectChange = (evt) => {

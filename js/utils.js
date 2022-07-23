@@ -106,10 +106,6 @@ const showError = (message) => {
   showPopup(popupContainer);
 };
 
-export {
-  showError,
-  showSuccess
-};
 
-
-export {getRandomArrayElement, getRandomPositiveInteger, getRandomPositiveFloat, getRandomFeatures, makeGenerator, getAvatar};
+export {  showError,
+  showSuccess, getRandomArrayElement, getRandomPositiveInteger, getRandomPositiveFloat, getRandomFeatures, makeGenerator, getAvatar};
