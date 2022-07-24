@@ -1,3 +1,8 @@
+import {showSuccess, showError} from './utils.js';
+import {resetMapFilterForm} from './form.js';
+import {setMapOriginalState} from './map.js';
+import {sendData} from './api.js';
+
 const adForm = document.querySelector('.ad-form');
 const priceField = adForm.querySelector('[name="price"]');
 const typeField = adForm.querySelector('[name="type"]');
@@ -5,10 +10,13 @@ const roomNumberField = adForm.querySelector('[name="rooms"]');
 const capacityField = adForm.querySelector('[name="capacity"]');
 const timeinField = adForm.querySelector('[name="timein"]');
 const timeoutField = adForm.querySelector('[name="timeout"]');
+const adFormSlider = adForm.querySelector('.ad-form__slider');
+const adFormSubmitButton = adForm.querySelector('.ad-form__submit');
 
 const MAX_OFFER_PRICE = 100000;
 const NOT_ROOM_VALUE = 100;
 const NOT_FOR_GUESTS = 100;
+const SLIDER_STEP = 10;
 
 const minPrices = {
   bungalow: 0,
@@ -49,13 +57,20 @@ const onPristineValidate = (evt) => {
   pristine.validate();
 };
 
+const updatePriceInput = (houseType) => {
+  priceField.placeholder = minPrices[houseType];
+  priceField.min = minPrices[houseType];
+  priceField.max = '100000';
+};
+
 const onTypeFieldSelectChange = (evt) => {
   evt.preventDefault();
-  priceField.setAttribute('placeholder', minPrices[evt.target.value]);
+  updatePriceInput(evt.target.value);
 };
+
 const onTimeFieldsSynchronize = (evt) => {
   evt.preventDefault();
-  if (evt.target.getAttribute('name') === 'timein') {
+  if (evt.target.name === 'timein') {
     timeoutField.value = evt.target.value;
   } else {
     timeinField.value = evt.target.value;
@@ -87,12 +102,38 @@ const validateCapacityField = () => {
   pristine.addValidator(capacityField, validate, capacityFieldErrorMessage);
 };
 
+const createPriceSlider = () => {
+  noUiSlider.create(adFormSlider, {
+    range: {
+      min: Number(priceField.min),
+      max: Number(priceField.max)
+    },
+    start: Number(priceField.min),
+    step: SLIDER_STEP,
+    connect: 'lower',
+    format: {
+      to: (value) => parseFloat(value).toFixed(0),
+      from: (value) => parseFloat(value).toFixed(0)
+    }
+  });
+
+  adFormSlider.noUiSlider.on('update', () => {
+    priceField.value = adFormSlider.noUiSlider.get();
+  });
+
+  priceField.addEventListener('change', (evt) => {
+    evt.preventDefault();
+    adFormSlider.noUiSlider.set(evt.target.value);
+  });
+};
+
 
 const addValidateForm = () => {
-  priceField.setAttribute('placeholder', minPrices[typeField.value]);
+  updatePriceInput(typeField.value);
   validatePriceField();
   validateRoomNumberField();
   validateCapacityField();
+  createPriceSlider();
 
   roomNumberField.addEventListener('change', onPristineValidate);
   capacityField.addEventListener('change', onPristineValidate);
@@ -105,4 +146,37 @@ const addValidateForm = () => {
 
 };
 
-export {addValidateForm};
+const formSendedSuccess = () => {
+  adFormSubmitButton.disabled = false;
+  setMapOriginalState();
+  resetMapFilterForm();
+  showSuccess();
+};
+
+const onSubmitForm = (evt) => {
+  evt.preventDefault();
+  const isValidated = pristine.validate();
+  if (isValidated) {
+    const formData = new FormData(evt.target);
+    adFormSubmitButton.disabled = true;
+    sendData(formSendedSuccess, showError, formData);
+  }
+};
+
+const onResetForm = () => {
+  adForm.reset();
+  adFormSlider.noUiSlider.reset();
+  pristine.reset();
+  resetMapFilterForm();
+  setMapOriginalState();
+};
+
+const initUserForm = () => {
+  priceField.setAttribute('placeholder', minPrices[typeField.value]);
+  addValidateForm();
+
+  adForm.addEventListener('submit', onSubmitForm);
+  adForm.addEventListener('reset', onResetForm);
+};
+
+export {addValidateForm, initUserForm};
