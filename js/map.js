@@ -4,7 +4,7 @@ import {createCard} from './template.js';
 const ZOOM_DEFAULT = 10;
 const DECIMAL_PLACES = 5;
 
-const addressField = document.querySelector('[name="address"]');
+const addressFieldElement = document.querySelector('[name="address"]');
 const coordsDefault = {
   lat: 35.68949,
   lng: 139.69171
@@ -38,7 +38,7 @@ L.tileLayer(
 ).addTo(map);
 
 const setAddress = (lat, lng) => {
-  addressField.value = `${lat}, ${lng}`;
+  addressFieldElement.value = `${lat}, ${lng}`;
 };
 
 mainPinMarker.addTo(map);
@@ -72,6 +72,7 @@ const createMarker = (item) => {
 };
 
 const renderOnMap = (items) => {
+  markerGroup.clearLayers();
   items.forEach((item) => {
     createMarker(item);
   });
