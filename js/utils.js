@@ -107,5 +107,4 @@ const showError = (message) => {
 };
 
 
-export {  showError,
-  showSuccess, getRandomArrayElement, getRandomPositiveInteger, getRandomPositiveFloat, getRandomFeatures, makeGenerator, getAvatar};
+export {showError, showSuccess, getRandomArrayElement, getRandomPositiveInteger, getRandomPositiveFloat, getRandomFeatures, makeGenerator, getAvatar};
